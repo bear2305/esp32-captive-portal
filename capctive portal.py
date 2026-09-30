@@ -22,4 +22,15 @@ class DNSServer:
 
         question = data[12:]               # copy question section as-is
 
+        # Answer: name = pointer to question (0xC00C), type A, class IN,
+        # short TTL, then the 4 raw IP bytes
+        answer = b'\xC0\x0C'
+        answer += b'\x00\x01'              # TYPE A
+        answer += b'\x00\x01'              # CLASS IN
+        answer += b'\x00\x00\x00\x3C'      # TTL = 60s
+        answer += b'\x00\x04'              # RDLENGTH = 4 bytes
+        answer += bytes(map(int, self.ip.split('.')))
+
+        return header + question + answer
+
 
