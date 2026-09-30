@@ -2,3 +2,4 @@ import _thread
 import socket
 import network
 import time
+#_thread.start_new_thread(background_task, ())
