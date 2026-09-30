@@ -12,7 +12,7 @@ class DNSServer:
         self.sock.setblocking(False)
         self.sock.bind(('0.0.0.0', 53))   
     def _build_response(self, data):
-         tid = data[:2]                     # transaction ID, echoed back
+        tid = data[:2]                     # transaction ID, echoed back
         flags = b'\x81\x80'                # standard response, no error
         qdcount = data[4:6]                # question count, echoed back
         ancount = b'\x00\x01'              # 1 answer
